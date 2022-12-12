@@ -1,6 +1,11 @@
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { useAppSelector } from '@/hooks/redux';
+
+import withAuth from '@/components/hoc/withAuth';
 import Layout from '@/components/layout/Layout';
+import ButtonLink from '@/components/links/ButtonLink';
 import Seo from '@/components/Seo';
 
 import Logo from '~/svg/pancake.svg';
@@ -17,35 +22,46 @@ import Logo from '~/svg/pancake.svg';
 // Before you begin editing, follow all comments with `STARTERCONF`,
 // to customize the default configuration.
 
-export default function HomePage() {
+export default withAuth(HomePage, 'optional');
+function HomePage() {
+  const router = useRouter();
+  const { user } = useAppSelector(({ user }) => user);
+
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
       <Seo />
 
       <main>
-        <div className='layout min-h-main my-6 flex flex-row items-center'>
+        <div className='layout min-h-main my-6 flex flex-row items-center justify-between'>
           <div className=''>
-            <p className='text-base font-semibold'>Halo, Selamat Datang!</p>
+            <p className='text-base font-semibold'>Halo, Selamat Datang</p>
             <h1 className='pt-3 text-5xl font-extrabold leading-tight'>
-              Admin Fakhri
+              Admin {user?.name}
             </h1>
-            <p className='pt-4 text-xl font-bold'>Bagaimana kabarmu saat ini?</p>
+            <p className='pt-4'>Bagaimana kabarmu saat ini?</p>
             <p>Mari buat perubahan demi masa depan toko lebih baik :D</p>
-            <div className='flex gap-4 pt-6'>
-              {/* <ButtonLink href='' className='rounded-2xl bg-brown py-4 px-20'>
-                Daftar
-              </ButtonLink>
-              <ButtonLink
-                href=''
-                variant='outline'
-                className='rounded-2xl py-4 px-20'
-              >
-                Login
-              </ButtonLink> */}
-            </div>
+            {!user?.token && (
+              <div className='flex gap-4 pt-6'>
+                {/* <ButtonLink
+                  href=''
+                  className='rounded-2xl bg-brown py-4 px-20'
+                  onClick={() => router.push('auth/register')}
+                >
+                  Daftar
+                </ButtonLink> */}
+                <ButtonLink
+                  href=''
+                  variant='outline'
+                  className='rounded-2xl py-4 px-20'
+                  onClick={() => router.push('/auth/login')}
+                >
+                  Login
+                </ButtonLink>
+              </div>
+            )}
           </div>
-          <Logo className='h-full w-5/12' />
+          <Logo className='h-full w-10/12 max-w-lg' />
         </div>
       </main>
     </Layout>

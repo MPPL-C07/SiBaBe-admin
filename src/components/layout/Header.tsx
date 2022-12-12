@@ -1,20 +1,25 @@
 import * as React from 'react';
 
+import { useAppSelector } from '@/hooks/redux';
 import useScrollPosition from '@/hooks/useScrollPosition';
 
+import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
 import UnderlineLink from '../links/UnderlineLink';
 
-const links = [
-  { href: '/', label: 'Home' },
+const privateLinks = [
   { href: '/products', label: 'Kelola Produk' },
-  { href: '/cart', label: 'Laporan Bisnis' },
-  { href: '/history', label: 'Daftar Pemesanan' },
+  { href: '/report', label: 'Laporan Bisnis' },
+  { href: '/orders', label: 'Daftar Pemesanan' },
 ];
 
 export default function Header() {
   const scrollPosition = useScrollPosition();
+  const { user } = useAppSelector(({ user }) => user);
+
+  const links = user && privateLinks;
+
   return (
     <header
       className={`sticky top-0 z-50 bg-white transition-all duration-200 ${
@@ -26,17 +31,24 @@ export default function Header() {
           href='/'
           className='text-xl font-bold hover:text-gray-600 '
         >
-          Sahabat Bima
+          Bima Bakery
         </UnstyledLink>
         <nav>
           <ul className='flex items-center justify-between space-x-4'>
-            {links.map(({ href, label }) => (
-              <li key={`${href}${label}`}>
-                <UnderlineLink href={href} className='hover:text-gray-600'>
-                  {label}
-                </UnderlineLink>
-              </li>
-            ))}
+            {links &&
+              links.map(({ href, label }) => (
+                <li key={`${href}${label}`}>
+                  <UnderlineLink href={href} className='hover:text-gray-600'>
+                    {label}
+                  </UnderlineLink>
+                </li>
+              ))}
+            <ButtonLink
+              href={user ? '/auth/logout' : '/auth/login'}
+              className='rounded-xl bg-brown py-2 px-4 font-secondary'
+            >
+              {user ? 'Logout' : 'Login'}
+            </ButtonLink>
           </ul>
         </nav>
       </div>

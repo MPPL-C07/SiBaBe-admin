@@ -2,65 +2,56 @@ import { AxiosError } from 'axios';
 import update from 'immutability-helper';
 import { AnyAction } from 'redux';
 
-import { UserCart } from '@/types';
+import { User } from '@/types';
 
-type CartState = {
-  cart?: UserCart;
+type UserState = {
+  user?: User;
   loading: boolean;
   error?: AxiosError;
 };
 
 const initialState = {
   loading: false,
-} as CartState;
+} as UserState;
 
-const CartReducer = (state = initialState, action: AnyAction) => {
+const ProductReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
-    case 'FETCH_CART':
+    case 'USER_LOGIN':
       return update(state, {
         loading: { $set: true },
       });
-    case 'FETCH_CART_SUCCESS':
+    case 'USER_LOGIN_SUCCESS':
       return update(state, {
-        cart: { $set: action.payload.data },
+        user: { $set: action.payload.data },
         loading: { $set: false },
       });
-    case 'FETCH_CART_ERROR':
+    case 'USER_LOGIN_ERROR':
       return update(state, {
         loading: { $set: false },
         error: { $set: action.payload.error },
       });
-    case 'ADD_QUANTITY':
+    case 'USER_LOGOUT':
+      return update(state, {
+        loading: { $set: false },
+        user: { $set: undefined },
+      });
+    case 'FETCH_USER':
       return update(state, {
         loading: { $set: true },
       });
-    case 'ADD_QUANTITY_SUCCESS':
+    case 'FETCH_USER_SUCCESS':
       return update(state, {
-        cart: { $set: action.payload.data },
+        user: { data: { $set: action.payload.data } },
         loading: { $set: false },
       });
-    case 'ADD_QUANTITY_ERROR':
+    case 'FETCH_USER_ERROR':
       return update(state, {
-        loading: { $set: false },
         error: { $set: action.payload.error },
-      });
-    case 'MINUS_QUANTITY':
-      return update(state, {
-        loading: { $set: true },
-      });
-    case 'MINUS_QUANTITY_SUCCESS':
-      return update(state, {
-        cart: { $set: action.payload.data },
         loading: { $set: false },
-      });
-    case 'MINUS_QUANTITY_ERROR':
-      return update(state, {
-        loading: { $set: false },
-        error: { $set: action.payload.error },
       });
     default:
       return state;
   }
 };
 
-export default CartReducer;
+export default ProductReducer;

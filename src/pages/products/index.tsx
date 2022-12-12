@@ -1,24 +1,31 @@
 import { Modal } from '@mantine/core';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 
+import Button from '@/components/buttons/Button';
 import ConfirmRemove from '@/components/ConfirmRemove';
+import withAuth from '@/components/hoc/withAuth';
 import Layout from '@/components/layout/Layout';
 import ProductCard from '@/components/ProductCard';
-import ProductDetail from '@/components/ProductDetail';
 import Seo from '@/components/Seo';
+import ProductDetail from '@/components/UpdateProduct';
 
 import { getProducts } from '@/redux/actions/Products';
 
 import { Product } from '@/types';
 
-export default function ProductPage() {
+export default withAuth(ProductPage, 'all');
+function ProductPage() {
   const { products, loading } = useAppSelector(({ products }) => products);
   const dispatch = useAppDispatch();
-  const [opened, setOpened] = React.useState(false);
+  const [openEditProduct, setOpenEditProduct] = React.useState(false);
+  const [openConfirmRemove, setOpenConfirmRemove] = React.useState(false);
   const [selectedProduct, setSelectedProduct] =
     React.useState<Product | null>();
+
+  const Router = useRouter();
 
   React.useEffect(() => {
     dispatch(getProducts());
@@ -29,22 +36,9 @@ export default function ProductPage() {
       {/* <Seo templateTitle='Home' /> */}
       <Seo />
 
-      {/* <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        centered
-        withCloseButton={false}
-        padding={0}
-        radius={50}
-        size={982}
-      >
-        {selectedProduct && (
-          <ConfirmRemove product={selectedProduct} setOpened={setOpened} />
-        )}
-      </Modal> */}
       <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
+        opened={openConfirmRemove}
+        onClose={() => setOpenConfirmRemove(false)}
         centered
         withCloseButton={false}
         padding={0}
@@ -52,7 +46,26 @@ export default function ProductPage() {
         size={982}
       >
         {selectedProduct && (
-          <ProductDetail product={selectedProduct} setOpened={setOpened} />
+          <ConfirmRemove
+            product={selectedProduct}
+            setOpened={setOpenConfirmRemove}
+          />
+        )}
+      </Modal>
+      <Modal
+        opened={openEditProduct}
+        onClose={() => setOpenEditProduct(false)}
+        centered
+        withCloseButton={false}
+        padding={0}
+        radius={50}
+        size={982}
+      >
+        {selectedProduct && (
+          <ProductDetail
+            product={selectedProduct}
+            setOpened={setOpenEditProduct}
+          />
         )}
       </Modal>
       <main>
@@ -62,13 +75,19 @@ export default function ProductPage() {
               <ProductCard
                 key={product.id}
                 product={product}
-                setOpened={setOpened}
+                setOpenEditProduct={setOpenEditProduct}
+                setOpenConfirmRemove={setOpenConfirmRemove}
                 setSelectedProduct={setSelectedProduct}
               />
             ))}
-            <div className='p-10'>
-              <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full'>Tambah Produk</button>
-            </div>
+        </div>
+        <div className='flex items-center justify-center p-10'>
+          <Button
+            className='rounded-full bg-brown py-5 px-32 font-bold text-white hover:bg-yellow-700 '
+            onClick={() => Router.push('/products/new-product')}
+          >
+            Tambah Produk
+          </Button>
         </div>
       </main>
     </Layout>

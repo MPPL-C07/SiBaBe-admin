@@ -3,33 +3,112 @@ export type ListOfObject<T> = {
 };
 
 export type Review = {
-  id: string;
-  name: string;
-  description: string;
+  feedback: string;
   rating: number;
+  username: string;
 };
 
 export type Product = {
-  id: string;
+  id: number;
   name: string;
   price: number;
   description: string;
   image: string;
-  reviews: Review[];
+  stock: number;
+  // reviews: Review[];
+};
+
+export type Cart = {
+  cartId: number;
+  productId: number;
+  quantity: number;
+  totalPrice: number;
+  product: Product;
+};
+
+export type UserCart = {
+  id: string;
+  username: string;
+  totalQty: number;
+  product: Cart[];
+  totalPrice: number;
+};
+
+export type UserData = {
+  username: string;
+  password: string;
+  name: string;
+  age: number;
+  email: string;
+  phone: string;
+  address: string;
+};
+
+export type User = {
+  data?: UserData;
+  username: string;
+  name: string;
+  token: string;
+};
+
+export type OrderData = {
+  invoice: string;
+  id: number;
+  createdAt: string;
+  cartId: number;
+  customerUsername: string;
+  totalQty: number;
+  totalPrice: number;
+  status: string;
+  address: string;
+  courier: string;
+  proofOfPayment: string;
+  validationBy: string;
 };
 
 export type History = {
-  id: string;
-  date: string;
-  total: number;
-  status: string;
-  items: ProductWithQuantity[];
+  order: OrderData[];
 };
 
-export type ProductWithQuantity = Product & { quantity: number };
+export type HistoryDetail = {
+  invoice: string;
+  orderID: number;
+  cartID: number;
+  status: string;
+  address: string;
+  courier: string;
+  product: ProductElement[];
+};
 
-export type Cart = {
-  id: string;
-  items: ListOfObject<ProductWithQuantity>;
-  total: number;
+export type ProductElement = {
+  quantity: number;
+  totalPrice: number;
+  product: ProductProduct;
+};
+
+export type ProductProduct = {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+};
+
+export type Orders = {
+  orderId: number;
+  cartId: number;
+  status: string;
+  orderList: ProductProduct[];
+};
+
+export type ReportData = {
+  date: Date;
+  income: number;
+  expense: number;
+};
+
+export type Report = {
+  month: string;
+  year: number;
+  report: ReportData[];
 };
