@@ -1,4 +1,4 @@
-import type { AnimationOptions,ChartType, ParsingOptions } from 'chart.js';
+import type { AnimationOptions, ChartType, ParsingOptions } from 'chart.js';
 
 import type {
   ArbitraryLineOptions,
@@ -7,7 +7,7 @@ import type {
 } from './plugins';
 
 declare module 'chart.js' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars
   interface PluginOptionsByType<TType extends ChartType> {
     htmlLegend: HtmlLegendOptions;
     arbitraryLine: ArbitraryLineOptions;
