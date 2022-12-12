@@ -1,3 +1,4 @@
+import type { ChartOptions } from 'chart.js';
 import * as React from 'react';
 import { LineChart } from 'scylla-ui';
 
@@ -36,11 +37,11 @@ const data = {
   ],
 };
 
-const options = {
+const options: ChartOptions<'line'> = {
   plugins: {
     tooltip: {
-      formatLabel: (label: string) => `Bulan ${label}`,
-      formatValue: (value: number) => `Rp ${thousandSeparator(value)}`,
+      formatLabel: (label) => `Bulan ${label}`,
+      formatValue: (value) => `Rp ${thousandSeparator(value)}`,
     },
   },
 };
