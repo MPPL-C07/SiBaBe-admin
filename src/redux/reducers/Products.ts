@@ -56,7 +56,11 @@ const ProductReducer = (state = initialState, action: AnyAction) => {
       });
     case 'DELETE_PRODUCT_SUCCESS':
       return update(state, {
-        products: { $set: state.products.filter((_, i) => i !== findIndex(action.meta.id, state.products)) },
+        products: {
+          $set: state.products.filter(
+            (_, i) => i !== findIndex(action.meta.id, state.products)
+          ),
+        },
         loading: { $set: false },
       });
     case 'DELETE_PRODUCT_ERROR':
@@ -70,7 +74,11 @@ const ProductReducer = (state = initialState, action: AnyAction) => {
       });
     case 'UPDATE_PRODUCT_SUCCESS':
       return update(state, {
-        products: { [findIndex(action.meta.id, state.products)]: { $set: action.payload.data } },
+        products: {
+          [findIndex(action.meta.id, state.products)]: {
+            $set: action.payload.data,
+          },
+        },
         loading: { $set: false },
       });
     case 'UPDATE_PRODUCT_ERROR':

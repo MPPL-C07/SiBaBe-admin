@@ -10,20 +10,21 @@ export const fetchOrders = () => (dispatch: AppDispatch) => {
     actionError: 'FETCH_ORDER_ERROR',
     type: 'API',
   });
-}
+};
 
 // confirm order by id
-export const confirmOrder = (id: number, status: string) => (dispatch: AppDispatch) => {
-  dispatch({
-    url: `/orders/${id}`,
-    method: 'POST',
-    meta: { id, status },
-    actionStart: 'CONFIRM_ORDER',
-    actionSuccess: 'CONFIRM_ORDER_SUCCESS',
-    actionError: 'CONFIRM_ORDER_ERROR',
-    type: 'API',
-    data: {
-      status,
-    }
-  });
-}
+export const confirmOrder =
+  (id: number, status: string) => (dispatch: AppDispatch) => {
+    dispatch({
+      url: `/orders/${id}`,
+      method: 'POST',
+      meta: { id, status },
+      actionStart: 'CONFIRM_ORDER',
+      actionSuccess: 'CONFIRM_ORDER_SUCCESS',
+      actionError: 'CONFIRM_ORDER_ERROR',
+      type: 'API',
+      data: {
+        status,
+      },
+    });
+  };

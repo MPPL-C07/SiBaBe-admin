@@ -44,15 +44,17 @@ export default function ProductCard({
         height={150}
         className='w-64'
       />
-      <div className='
-      absolute top-3 right-3 bg-auto bg-no-repeat bg-center bg-red-300 rounded-full p-1
+      <div
+        className='
+      absolute top-3 right-3 rounded-full bg-red-300 bg-auto bg-center bg-no-repeat p-1
       transition-all duration-200 hover:text-primary-50'
-      onClick={(e) => {
-        e.stopPropagation();
-        setOpenConfirmRemove(true);
-        setSelectedProduct(product);
-      }}>
-        <FiTrash2/>
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpenConfirmRemove(true);
+          setSelectedProduct(product);
+        }}
+      >
+        <FiTrash2 />
       </div>
       <div className='flex h-16 items-center justify-between px-5 py-3'>
         <div className=''>
@@ -61,14 +63,14 @@ export default function ProductCard({
             Rp {thousandSeparator(product.price)}
           </p>
         </div>
-          <FiEdit
-            className='text-2xl transition-all duration-200 hover:text-primary-50'
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenEditProduct(true);
-              setSelectedProduct(product);
-            }}
-          />
+        <FiEdit
+          className='text-2xl transition-all duration-200 hover:text-primary-50'
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpenEditProduct(true);
+            setSelectedProduct(product);
+          }}
+        />
       </div>
     </div>
   );

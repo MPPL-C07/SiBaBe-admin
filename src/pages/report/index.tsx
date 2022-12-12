@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { LineChart } from 'scylla-ui';
 
-import { useAppDispatch} from '@/hooks/redux';
+import { useAppDispatch } from '@/hooks/redux';
 
 import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';

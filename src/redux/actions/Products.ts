@@ -1,5 +1,4 @@
 import { AppDispatch } from '@/redux';
-import { Product } from '@/types';
 
 export const getProducts = () => (dispatch: AppDispatch) => {
   dispatch({
@@ -14,7 +13,13 @@ export const getProducts = () => (dispatch: AppDispatch) => {
 
 //add product
 export const addProduct =
-  (name: string, price: number, description: string, image: string, stock: number) =>
+  (
+    name: string,
+    price: number,
+    description: string,
+    image: string,
+    stock: number
+  ) =>
   (dispatch: AppDispatch) => {
     dispatch({
       url: '/products',
@@ -45,11 +50,17 @@ export const deleteProduct = (id: number) => (dispatch: AppDispatch) => {
     actionError: 'DELETE_PRODUCT_ERROR',
     type: 'API',
   });
-}
+};
 
 //update product
 export const updateProduct =
-  (id: number, name: string, price: number, description: string, stock: number) =>
+  (
+    id: number,
+    name: string,
+    price: number,
+    description: string,
+    stock: number
+  ) =>
   (dispatch: AppDispatch) => {
     dispatch({
       url: `/products/${id}`,
