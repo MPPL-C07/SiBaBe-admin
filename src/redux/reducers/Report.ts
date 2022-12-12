@@ -22,12 +22,12 @@ const ReportReducer = (state = initialState, action: AnyAction) => {
       });
     case 'GET_MONTHLY_REPORT_SUCCESS':
       return update(state, {
-        report: { $set: action.payload },
+        report: { $set: action.payload.data },
         loading: { $set: false },
       });
     case 'GET_MONTHLY_REPORT_ERROR':
       return update(state, {
-        error: { $set: action.payload },
+        error: { $set: action.payload.message },
         loading: { $set: false },
       });
     default:
