@@ -2,7 +2,7 @@ import type { ChartOptions } from 'chart.js';
 import * as React from 'react';
 import { LineChart } from 'scylla-ui';
 
-import { useAppDispatch } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 
 import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
@@ -13,43 +13,51 @@ import Separator from '@/components/Separator';
 import { getMonthlyReport } from '@/redux/actions/Report';
 import thousandSeparator from '@/util/thousandSeparator';
 
-const data = {
-  labels: [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'Mei',
-    'Jun',
-    'Jul',
-    'Agust',
-    'Sept',
-    'Okto',
-    'Nov',
-    'Des',
-  ],
-  datasets: [
-    {
-      data: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200],
-      backgroundColor: '#D6AD60',
-      borderColor: '#D6AD60',
-    },
-  ],
-};
-
-const options: ChartOptions<'line'> = {
-  plugins: {
-    tooltip: {
-      formatLabel: (label) => `Bulan ${label}`,
-      formatValue: (value) => `Rp ${thousandSeparator(value)}`,
-    },
-  },
-};
-
 export default withAuth(ReportPage, 'all');
 function ReportPage() {
-  // const { report } = useAppSelector(({ report }) => report);
+  const { report } = useAppSelector(({ report }) => report);
   const dispatch = useAppDispatch();
+
+  const data = React.useMemo(
+    () => ({
+      labels: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'Mei',
+        'Jun',
+        'Jul',
+        'Agust',
+        'Sept',
+        'Okto',
+        'Nov',
+        'Des',
+      ],
+      datasets: [
+        {
+          data:
+            report?.map((item) =>
+              item.report
+                ?.map((item) => item.income - item.expense)
+                .reduce((a, b) => a + b, 0)
+            ) || [],
+          backgroundColor: '#D6AD60',
+          borderColor: '#D6AD60',
+        },
+      ],
+    }),
+    [report]
+  );
+
+  const options: ChartOptions<'line'> = {
+    plugins: {
+      tooltip: {
+        formatLabel: (label) => `Bulan ${label}`,
+        formatValue: (value) => `Rp ${thousandSeparator(value)}`,
+      },
+    },
+  };
 
   React.useEffect(() => {
     dispatch(getMonthlyReport());
