@@ -35,8 +35,8 @@ export default function ConfirmRemove({
           className='absolute top-7 right-7 cursor-pointer text-2xl'
           onClick={() => setOpened(false)}
         />
-        <div className='mx-14 mt-16'>
-          <p className='text-center font-secondary text-4xl font-bold'>
+        <div className='mx-14 mt-16 '>
+          <p className='my-5 text-center font-secondary text-4xl font-bold'>
             Apakah Anda ingin menghapus produk {product.name} ?
           </p>
           <button

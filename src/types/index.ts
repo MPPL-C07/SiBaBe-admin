@@ -89,10 +89,18 @@ export type ProductProduct = {
 };
 
 export type Orders = {
+  invoice: string;
   orderId: number;
   cartId: number;
   status: string;
-  orderList: ProductProduct[];
+  orderList: OrderList[];
+};
+
+export type OrderList = {
+  productId: number;
+  quantity: number;
+  totalPrice: number;
+  product: ProductProduct;
 };
 
 export type ReportData = {

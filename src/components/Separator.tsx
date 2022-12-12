@@ -4,7 +4,7 @@ type SeparatorProps = {
   width?: number | string;
   color?: string;
   className?: string;
-  height?: number;
+  height?: number | string;
 };
 
 export default function Separator({
