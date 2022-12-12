@@ -2,12 +2,6 @@ export type ListOfObject<T> = {
   [key: string]: T;
 };
 
-export type Review = {
-  feedback: string;
-  rating: number;
-  username: string;
-};
-
 export type Product = {
   id: number;
   name: string;
