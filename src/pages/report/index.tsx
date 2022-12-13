@@ -39,14 +39,15 @@ function ReportPage() {
       ],
       datasets: [
         {
-          data: report?.map((item) => {
-            if (!item.report) {
-              return 0;
-            }
-            return item.report
-              ?.map((item) => item.income - item.expense)
-              .reduce((a, b) => a + b, 0);
-          }) || [],
+          data:
+            report?.map((item) => {
+              if (!item.report) {
+                return 0;
+              }
+              return item.report
+                ?.map((item) => item.income - item.expense)
+                .reduce((a, b) => a + b, 0);
+            }) || [],
           backgroundColor: '#D6AD60',
           borderColor: '#D6AD60',
         },
@@ -94,7 +95,7 @@ function ReportPage() {
           <div className='relative'>
             <LineChart id='report' hideBrush data={data} options={options} />
           </div>
-            
+
           <div className='mt-9 flex items-center justify-end gap-7'>
             <div>
               <Button

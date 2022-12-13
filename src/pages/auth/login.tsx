@@ -93,7 +93,10 @@ function LoginPage() {
                     </div>
 
                     <div className='flex justify-end'>
-                      <Button type='submit' className='rounded-2xl py-3 px-20 bg-brown'>
+                      <Button
+                        type='submit'
+                        className='rounded-2xl bg-brown py-3 px-20'
+                      >
                         Masuk
                       </Button>
                     </div>
