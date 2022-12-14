@@ -8,6 +8,7 @@ import { useAppDispatch } from '@/hooks/redux';
 import Separator from '@/components/Separator';
 
 import { confirmOrder } from '@/redux/actions/Orders';
+import thousandSeparator from '@/util/thousandSeparator';
 
 import { Orders } from '@/types';
 
@@ -45,11 +46,11 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
     }
     return (
       <div>
-        <p>Total Harga: {total}</p>
+        <p>Total Harga: Rp {thousandSeparator(total)}</p>
         {orders.orderList.map((orders) => (
           <p key={orders.productId}>
             Harga {orders.quantity} {orders.product.name}: Rp{' '}
-            {orders.totalPrice}
+            {thousandSeparator(orders.totalPrice)}
           </p>
         ))}
       </div>
@@ -58,7 +59,7 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
 
   return (
     <div onMouseOver={onMouseOverHandler} onMouseOut={onMouseOutHandler}>
-      <Tooltip label={tooltipLabel()} color='yellow'>
+      <Tooltip label={tooltipLabel()} color='#D6AD60'>
         <div className='flex cursor-pointer justify-between py-8  transition-all duration-200'>
           <div className=' w-1/5'>
             <p className='text-sm'>Invoice</p>
