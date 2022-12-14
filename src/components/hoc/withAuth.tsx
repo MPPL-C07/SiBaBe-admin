@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { ImSpinner8 } from 'react-icons/im';
+import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 
@@ -63,6 +64,7 @@ export default function withAuth<T extends WithAuthProps = WithAuthProps>(
                 if (error.response.status === 401) {
                   dispatch(logout());
                   router.push(LOGIN_ROUTE);
+                  toast.warn('Your session has expired. Please login again.')
                 }
                 return Promise.reject(error.message);
               }
