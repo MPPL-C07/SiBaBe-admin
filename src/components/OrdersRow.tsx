@@ -98,7 +98,13 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
                 ></FiX>
               </>
             ) : orders.status === 'Terima' ? (
-              <FiMap className='m-2 text-2xl'></FiMap>
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href={orders.address}
+              >
+                <FiMap className='m-2 text-2xl'></FiMap>
+              </a>
             ) : orders.status === 'Tolak' ? (
               <></>
             ) : // <FiXSquare className='m-2 text-4xl'></FiXSquare>

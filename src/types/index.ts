@@ -93,6 +93,7 @@ export type Orders = {
   orderId: number;
   cartId: number;
   status: string;
+  address: string;
   orderList: OrderList[];
 };
 

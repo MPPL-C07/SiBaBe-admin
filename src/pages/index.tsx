@@ -37,7 +37,7 @@ function HomePage() {
           <div className=''>
             <p className='text-base font-semibold'>Halo, Selamat Datang</p>
             <h1 className='pt-3 text-5xl font-extrabold leading-tight'>
-              Admin {user?.name}
+              Admin {user?.name}!
             </h1>
             <p className='pt-4'>Bagaimana kabarmu saat ini?</p>
             <p>Mari buat perubahan demi masa depan toko lebih baik :D</p>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import * as React from 'react';
 
 import { useAppDispatch } from '@/hooks/redux';
@@ -43,15 +42,6 @@ function LoginPage() {
                 <h2 className='mt-6 text-5xl font-medium text-gray-900'>
                   Masuk
                 </h2>
-                <p className='mt-2 text-sm text-gray-600'>
-                  Pengguna baru?{' '}
-                  <Link
-                    href='/auth/register'
-                    className='font-medium text-blue-400 hover:text-blue-300'
-                  >
-                    Buat akun baru
-                  </Link>
-                </p>
               </div>
 
               <div className='mt-8 space-y-6'>

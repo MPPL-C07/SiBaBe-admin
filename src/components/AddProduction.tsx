@@ -6,7 +6,6 @@ import { FiImage, FiUpload, FiXCircle } from 'react-icons/fi';
 import { RiCloseFill } from 'react-icons/ri';
 
 import Button from '@/components/buttons/Button';
-import ProductionRow from '@/components/ProductionRow';
 import Separator from '@/components/Separator';
 
 // import { API_KEY } from '@/pages/api/products';
@@ -118,42 +117,45 @@ export default function AddProduction({
           width={1024}
           height={320}
         /> */}
-          <Dropzone
-            onDrop={setFiles}
-            // onReject={(files) => console.log('rejected files', files)}
-            maxSize={25 * 1024 * 1024}
-            accept={IMAGE_MIME_TYPE}
-            multiple={false}
-            styles={{
-              root: { backgroundColor: 'transparent' },
-            }}
-            loading={loading}
-          >
-            <div className=' w-40'>{previews}</div>
-            <Group
-              position='center'
-              spacing='xl'
-              style={{ minHeight: 220, pointerEvents: 'none' }}
+          <div>
+            <Dropzone
+              onDrop={setFiles}
+              // onReject={(files) => console.log('rejected files', files)}
+              maxSize={25 * 1024 * 1024}
+              accept={IMAGE_MIME_TYPE}
+              multiple={false}
+              styles={{
+                root: { backgroundColor: 'transparent' },
+              }}
+              loading={loading}
             >
-              <Dropzone.Accept>
-                <FiUpload size={50} className='text-blue-500' />
-              </Dropzone.Accept>
-              <Dropzone.Reject>
-                <FiXCircle size={50} className='text-red-500' />
-              </Dropzone.Reject>
-              <Dropzone.Idle>
-                <FiImage size={50} />
-              </Dropzone.Idle>
-              <div>
-                <Text size='xl' inline>
-                  Geser file gambar ke sini atau klik untuk upload
-                </Text>
-                <Text size='sm' color='dimmed' inline mt={7}>
-                  File tidak boleh lebih dari 25MB
-                </Text>
-              </div>
-            </Group>
-          </Dropzone>
+              <div className=' w-40'>{previews}</div>
+              <Group
+                position='center'
+                spacing='xl'
+                style={{ minHeight: 220, pointerEvents: 'none' }}
+              >
+                <Dropzone.Accept>
+                  <FiUpload size={50} className='text-blue-500' />
+                </Dropzone.Accept>
+                <Dropzone.Reject>
+                  <FiXCircle size={50} className='text-red-500' />
+                </Dropzone.Reject>
+                <Dropzone.Idle>
+                  <FiImage size={50} />
+                </Dropzone.Idle>
+                <div>
+                  <Text size='xl' inline>
+                    Geser file gambar ke sini atau klik untuk upload
+                  </Text>
+                  <Text size='sm' color='dimmed' inline mt={7}>
+                    File tidak boleh lebih dari 25MB
+                  </Text>
+                </div>
+              </Group>
+            </Dropzone>
+            <Separator height={1.5} width='50%' className='mx-auto' />
+          </div>
           <div className='ml-14 mt-7'>
             <p className='text-center font-secondary text-2xl'>
               Data Produksi Tambahan
@@ -165,7 +167,33 @@ export default function AddProduction({
                 type='date'
               />
               <Separator width='30%' height={2} className='mx-auto' />
-              <ProductionRow></ProductionRow>
+              <div className='flex flex-row justify-between py-5 pr-10'>
+                <div className='flex flex-col'>
+                  <label>Nama</label>
+                  <input
+                    className='my-5 w-80 max-w-4xl rounded-[50px]'
+                    type='text'
+                    placeholder='Fill the name of additional Product'
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label>Kuantitas</label>
+                  <input
+                    className='my-5 w-52 max-w-4xl rounded-[50px]'
+                    type='text'
+                    placeholder='Fill the quantity of it'
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label>Harga</label>
+                  <input
+                    className='my-5 w-80 max-w-4xl rounded-[50px]'
+                    type='text'
+                    placeholder='Fill the price of it'
+                  />
+                </div>
+              </div>
+              {/* <ProductionRow></ProductionRow> */}
               {/* <label>Harga</label> */}
               {/* <input
               className='my-5 max-w-4xl rounded-[50px]'
