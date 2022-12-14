@@ -31,7 +31,7 @@ export default function Header() {
           href='/'
           className='text-xl font-bold hover:text-gray-600 '
         >
-          Bima Bakery
+          Sahabat Bima
         </UnstyledLink>
         <nav>
           <ul className='flex items-center justify-between space-x-4'>

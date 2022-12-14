@@ -1,9 +1,9 @@
+import { Button } from '@mantine/core';
 import * as React from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 
 import { useAppDispatch } from '@/hooks/redux';
 
-import Button from '@/components/buttons/Button';
 import NextImage from '@/components/NextImage';
 
 import { updateProduct } from '@/redux/actions/Products';
@@ -85,7 +85,7 @@ export default function UpdateProduct({
               onChange={(e) => setStock(Number(e.target.value))}
             />
             <Button
-              className='my-5 max-w-xs rounded-[50px] bg-yellow-500 text-2xl'
+              className='my-5 max-w-xs rounded-[50px] bg-yellow-500 text-2xl hover:bg-yellow-600'
               type='submit'
               value='Simpan'
             >

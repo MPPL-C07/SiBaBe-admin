@@ -1,3 +1,4 @@
+import { Button } from '@mantine/core';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { RiCloseFill } from 'react-icons/ri';
@@ -39,20 +40,20 @@ export default function ConfirmRemove({
           <p className='my-5 text-center font-secondary text-4xl font-bold'>
             Apakah Anda ingin menghapus produk {product.name} ?
           </p>
-          <button
-            className='rounded-full bg-red-500 py-2 px-4 text-3xl font-bold text-white hover:bg-red-700'
+          <Button
+            className='h-max w-max rounded-full bg-red-500 px-4 pb-2 text-3xl font-bold text-white hover:bg-red-700'
             onClick={() => setOpened(false)}
           >
             {' '}
             no{' '}
-          </button>
-          <button
-            className='absolute right-12 rounded-full bg-emerald-500 py-2 px-4 text-3xl font-bold text-white hover:bg-emerald-700'
+          </Button>
+          <Button
+            className='absolute right-12 h-max w-max rounded-full bg-emerald-500 px-4 pb-2 text-3xl font-bold text-white hover:bg-emerald-700'
             onClick={handleDelete}
           >
             {' '}
             yes{' '}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

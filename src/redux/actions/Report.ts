@@ -10,3 +10,31 @@ export const getMonthlyReport = () => (dispatch: AppDispatch) => {
     type: 'API',
   });
 };
+
+// add production
+export const addProduction =
+  (
+    name: string,
+    price: number,
+    description: string,
+    image: string,
+    stock: number
+  ) =>
+  (dispatch: AppDispatch) => {
+    dispatch({
+      url: '/products',
+      method: 'POST',
+      meta: { name, price, description, image, stock },
+      actionStart: 'ADD_PRODUCT',
+      actionSuccess: 'ADD_PRODUCT_SUCCESS',
+      actionError: 'ADD_PRODUCT_ERROR',
+      type: 'API',
+      data: {
+        name,
+        price,
+        description,
+        image,
+        stock,
+      },
+    });
+  };
