@@ -98,14 +98,14 @@ const apiMiddleware: Middleware =
             render: (data) => {
               const successData = data.data as AxiosResponse<ApiResponseType>;
               return `${successData.data.message}`;
-            }
+            },
           },
           error: {
             render: (error) => {
               const errorData = error.data as AxiosError<ApiResponseType>;
               return `${errorData.response?.data?.errors}`;
-            }
-          }
+            },
+          },
         }
       );
     }
