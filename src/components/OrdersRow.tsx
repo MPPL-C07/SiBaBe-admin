@@ -72,41 +72,36 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
               </p>
             ))}
           </div>
-          {orders.status === 'Menunggu Validasi' && (
-            <div className='flex w-1/5 flex-row justify-center'>
-              <FiCheck
-                className='mx-8 h-20 text-3xl'
-                onClick={() => {
-                  dispatch(confirmOrder(orders.orderId, 'Terima'));
-                  Router.push('/orders');
-                }}
-              ></FiCheck>
-              <div
-                style={{
-                  height: '30px',
-                  border: '1px solid #D6AD60BF',
-                }}
-                className='mt-7'
-              />
-              <FiX
-                className='mx-8 h-20 text-3xl'
-                onClick={() => {
-                  dispatch(confirmOrder(orders.orderId, 'Tolak'));
-                  Router.push('/orders');
-                }}
-              ></FiX>
-            </div>
-          )}
-          {orders.status === 'Terima' && (
-            <div className='flex w-1/5 flex-row justify-center'>
-              <FiMap className='text-2xl'></FiMap>
-            </div>
-          )}
-          {orders.status === 'Tolak' && (
-            <div className='flex w-1/5 flex-row justify-center'>
-              <FiXSquare className='text-2xl'></FiXSquare>
-            </div>
-          )}
+          <div className='flex w-1/5 flex-row justify-end'>
+            {orders.status === 'Menunggu Validasi' ? (
+              <>
+                <FiCheck
+                  className='m-2 h-10 text-4xl'
+                  onClick={() => {
+                    dispatch(confirmOrder(orders.orderId, 'Terima'));
+                    Router.push('/orders');
+                  }}
+                ></FiCheck>
+                <div
+                  style={{
+                    height: '60px',
+                    border: '1px solid #D6AD60BF',
+                  }}
+                />
+                <FiX
+                  className='m-2 h-10 text-4xl'
+                  onClick={() => {
+                    dispatch(confirmOrder(orders.orderId, 'Tolak'));
+                    Router.push('/orders');
+                  }}
+                ></FiX>
+              </>
+            ) : orders.status === 'Terima' ? (
+              <FiMap className='m-2 text-4xl'></FiMap>
+            ) : orders.status === 'Tolak' ? (
+              <FiXSquare className='m-2 text-4xl'></FiXSquare>
+            ) : null}
+          </div>
           {/* <div className=''>
           <p className='text-sm'>Pembelian pada</p>
           <p className='font-secondary text-xl font-bold'>{orders.date}</p>
