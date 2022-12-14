@@ -1,4 +1,4 @@
-import { Button, Group, Image, Text } from '@mantine/core';
+import { Group, Image, Text } from '@mantine/core';
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import axios from 'axios';
 import * as React from 'react';
@@ -6,6 +6,7 @@ import { FiImage, FiUpload, FiXCircle } from 'react-icons/fi';
 
 import { useAppDispatch } from '@/hooks/redux';
 
+import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';

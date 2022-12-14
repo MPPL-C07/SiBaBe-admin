@@ -10,7 +10,7 @@ export default function ProductionRow() {
       <div className='flex flex-col'>
         <label>Nama</label>
         <input
-          className='my-5 w-72 max-w-4xl rounded-[50px]'
+          className='my-5 w-80 max-w-4xl rounded-[50px]'
           type='text'
           placeholder='Fill the name of additional Product'
         />
@@ -18,7 +18,7 @@ export default function ProductionRow() {
       <div className='flex flex-col'>
         <label>Kuantitas</label>
         <input
-          className='my-5 w-56 max-w-4xl rounded-[50px]'
+          className='my-5 w-52 max-w-4xl rounded-[50px]'
           type='text'
           placeholder='Fill the quantity of it'
         />
@@ -26,7 +26,7 @@ export default function ProductionRow() {
       <div className='flex flex-col'>
         <label>Harga</label>
         <input
-          className='my-5 w-72 max-w-4xl rounded-[50px]'
+          className='my-5 w-80 max-w-4xl rounded-[50px]'
           type='text'
           placeholder='Fill the price of it'
         />

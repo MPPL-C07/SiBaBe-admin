@@ -1,10 +1,11 @@
-import { Button, Group, Image, Text } from '@mantine/core';
+import { Group, Image, Text } from '@mantine/core';
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 // import axios from 'axios';
 import * as React from 'react';
 import { FiImage, FiUpload, FiXCircle } from 'react-icons/fi';
 import { RiCloseFill } from 'react-icons/ri';
 
+import Button from '@/components/buttons/Button';
 import ProductionRow from '@/components/ProductionRow';
 import Separator from '@/components/Separator';
 
@@ -159,7 +160,10 @@ export default function AddProduction({
             </p>
             <form className='flex flex-col' onSubmit={handleSubmit}>
               <label>Tanggal</label>
-              <input className='my-5 w-max  rounded-[50px]' type='date' />
+              <input
+                className='my-5 w-full  max-w-4xl rounded-[50px]'
+                type='date'
+              />
               <Separator width='30%' height={2} className='mx-auto' />
               <ProductionRow></ProductionRow>
               {/* <label>Harga</label> */}
@@ -185,9 +189,8 @@ export default function AddProduction({
             /> */}
 
               <Button
-                className='my-5 max-w-xs rounded-[50px] bg-yellow-500 text-2xl hover:bg-yellow-600'
+                className='self-center rounded-full bg-brown py-4 px-24 font-secondary font-bold'
                 type='submit'
-                value='Simpan'
               >
                 Simpan
               </Button>

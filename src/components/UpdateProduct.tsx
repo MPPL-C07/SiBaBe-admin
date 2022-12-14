@@ -1,9 +1,9 @@
-import { Button } from '@mantine/core';
 import * as React from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 
 import { useAppDispatch } from '@/hooks/redux';
 
+import Button from '@/components/buttons/Button';
 import NextImage from '@/components/NextImage';
 import Separator from '@/components/Separator';
 

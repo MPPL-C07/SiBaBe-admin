@@ -1,7 +1,7 @@
 import { Tooltip } from '@mantine/core';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { FiCheck, FiMap, FiX, FiXSquare } from 'react-icons/fi';
+import { FiCheck, FiMap, FiX } from 'react-icons/fi';
 
 import { useAppDispatch } from '@/hooks/redux';
 
@@ -77,7 +77,7 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
             {orders.status === 'Menunggu Validasi' ? (
               <>
                 <FiCheck
-                  className='m-2 h-10 text-4xl'
+                  className='m-2 h-10 pr-5 text-5xl'
                   onClick={() => {
                     dispatch(confirmOrder(orders.orderId, 'Terima'));
                     Router.push('/orders');
@@ -90,7 +90,7 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
                   }}
                 />
                 <FiX
-                  className='m-2 h-10 text-4xl'
+                  className='m-2 h-10 pl-5 text-5xl'
                   onClick={() => {
                     dispatch(confirmOrder(orders.orderId, 'Tolak'));
                     Router.push('/orders');
@@ -98,10 +98,11 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
                 ></FiX>
               </>
             ) : orders.status === 'Terima' ? (
-              <FiMap className='m-2 text-4xl'></FiMap>
+              <FiMap className='m-2 text-2xl'></FiMap>
             ) : orders.status === 'Tolak' ? (
-              <FiXSquare className='m-2 text-4xl'></FiXSquare>
-            ) : null}
+              <></>
+            ) : // <FiXSquare className='m-2 text-4xl'></FiXSquare>
+            null}
           </div>
           {/* <div className=''>
           <p className='text-sm'>Pembelian pada</p>
