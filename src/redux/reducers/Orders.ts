@@ -43,7 +43,7 @@ const OrderReducer = (state = initialState, action: AnyAction) => {
       return update(state, {
         orders: {
           [findIndex(action.meta.id, state.orders)]: {
-            status: { $set: action.payload.data.status},
+            status: { $set: action.payload.data.status },
           },
         },
         loading: { $set: false },
