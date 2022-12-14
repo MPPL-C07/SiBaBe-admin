@@ -3,6 +3,7 @@ import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import axios from 'axios';
 import * as React from 'react';
 import { FiImage, FiUpload, FiXCircle } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { useAppDispatch } from '@/hooks/redux';
 
@@ -30,6 +31,10 @@ function NewProduct() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (files.length === 0) {
+      toast.error('Gambar harus diisi');
+      return;
+    };
     // add product
     if (
       nameRef.current &&
@@ -153,6 +158,7 @@ function NewProduct() {
                 className='rounded-full border-none px-6'
                 type='text'
                 ref={nameRef}
+                required
                 placeholder='Isi nama produk'
               />
               <label className='ml-5'>Harga</label>
@@ -160,6 +166,7 @@ function NewProduct() {
                 className='rounded-full border-none px-6'
                 type='text'
                 ref={priceRef}
+                required
                 placeholder='Isi harga produk'
               />
               <label className='ml-5'>Stock</label>
@@ -167,6 +174,7 @@ function NewProduct() {
                 className='rounded-full border-none px-6'
                 type='text'
                 ref={stockRef}
+                required
                 placeholder='Isi stock produk'
               />
               <label className='ml-5'>Deskripsi</label>
@@ -174,6 +182,7 @@ function NewProduct() {
                 className='rounded-3xl border-none px-6'
                 rows={4}
                 ref={descriptionRef}
+                required
                 placeholder='Isi deskripsi produk'
               ></textarea>
             </form>
