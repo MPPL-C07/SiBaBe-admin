@@ -1,13 +1,12 @@
-import { AxiosError } from 'axios';
 import update from 'immutability-helper';
 import { AnyAction } from 'redux';
 
-import { Orders } from '@/types';
+import { ApiResponseType, Orders } from '@/types';
 
 type OrderState = {
   orders: Orders[];
   loading: boolean;
-  error?: AxiosError;
+  error?: ApiResponseType;
 };
 
 const initialState = {
@@ -32,7 +31,7 @@ const OrderReducer = (state = initialState, action: AnyAction) => {
       });
     case 'FETCH_ORDER_ERROR':
       return update(state, {
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
         loading: { $set: false },
       });
     case 'CONFIRM_ORDER':
@@ -50,7 +49,7 @@ const OrderReducer = (state = initialState, action: AnyAction) => {
       });
     case 'CONFIRM_ORDER_ERROR':
       return update(state, {
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
         loading: { $set: false },
       });
     default:
