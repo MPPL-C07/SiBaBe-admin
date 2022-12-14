@@ -83,7 +83,7 @@ function ProductPage() {
         </div>
         <div className='flex items-center justify-center p-10'>
           <Button
-            className='rounded-full bg-brown py-5 px-32 font-bold text-white hover:bg-yellow-700 '
+            className='rounded-full bg-brown py-5 px-32 font-bold'
             onClick={() => Router.push('/products/new-product')}
           >
             Tambah Produk

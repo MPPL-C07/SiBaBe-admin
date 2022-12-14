@@ -1,7 +1,6 @@
 import { Group, Image, Text } from '@mantine/core';
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import { FiImage, FiUpload, FiXCircle } from 'react-icons/fi';
 
@@ -11,6 +10,7 @@ import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
+import Separator from '@/components/Separator';
 
 import { API_KEY } from '@/pages/api/products';
 import { addProduct } from '@/redux/actions/Products';
@@ -20,14 +20,13 @@ function NewProduct() {
   //useRef
   const nameRef = React.useRef<HTMLInputElement>(null);
   const priceRef = React.useRef<HTMLInputElement>(null);
-  const descriptionRef = React.useRef<HTMLInputElement>(null);
+  const descriptionRef = React.useRef<HTMLTextAreaElement>(null);
   const stockRef = React.useRef<HTMLInputElement>(null);
 
   const [files, setFiles] = React.useState<FileWithPath[]>([]);
   const [loading, setLoading] = React.useState(false);
 
   const dispatch = useAppDispatch();
-  const Router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,89 +97,96 @@ function NewProduct() {
   return (
     <Layout>
       <Seo />
-      <main>
-        <div className='layout min-h-main mb-12 flex flex-col'>
-          <p className='text-xl font-bold'>Tambah Produk Baru</p>
-          <div className='mb-8 gap-24 overflow-hidden rounded-[50px] border-solid p-0'>
+      <main className='bg-white pb-12'>
+        <div className='layout min-h-main flex flex-col'>
+          <p className='my-14 text-xl font-bold'>Tambah Produk Baru</p>
+          <div className='mx-8 space-y-9 rounded-3xl bg-grey overflow-hidden'>
             <div>
-              <div className='ml-14 mt-7'>
-                <Dropzone
-                  onDrop={setFiles}
-                  // onReject={(files) => console.log('rejected files', files)}
-                  maxSize={25 * 1024 * 1024}
-                  accept={IMAGE_MIME_TYPE}
-                  multiple={false}
-                  styles={{
-                    root: { backgroundColor: 'transparent' },
-                  }}
-                  loading={loading}
+              <Dropzone
+                onDrop={setFiles}
+                // onReject={(files) => console.log('rejected files', files)}
+                maxSize={25 * 1024 * 1024}
+                accept={IMAGE_MIME_TYPE}
+                multiple={false}
+                styles={{
+                  root: {
+                    backgroundColor: 'rgba(217, 217, 217, 0.5)',
+                    border: 'none',
+                  },
+                }}
+                loading={loading}
+              >
+                <div className=' w-40'>{previews}</div>
+                <Group
+                  position='center'
+                  spacing='xl'
+                  style={{ minHeight: 220, pointerEvents: 'none' }}
                 >
-                  <div className=' w-40'>{previews}</div>
-                  <Group
-                    position='center'
-                    spacing='xl'
-                    style={{ minHeight: 220, pointerEvents: 'none' }}
-                  >
-                    <Dropzone.Accept>
-                      <FiUpload size={50} className='text-blue-500' />
-                    </Dropzone.Accept>
-                    <Dropzone.Reject>
-                      <FiXCircle size={50} className='text-red-500' />
-                    </Dropzone.Reject>
-                    <Dropzone.Idle>
-                      <FiImage size={50} />
-                    </Dropzone.Idle>
-                    <div>
-                      <Text size='xl' inline>
-                        Geser file gambar ke sini atau klik untuk upload
-                      </Text>
-                      <Text size='sm' color='dimmed' inline mt={7}>
-                        File tidak boleh lebih dari 25MB
-                      </Text>
-                    </div>
-                  </Group>
-                </Dropzone>
-                <form className='flex flex-col' onSubmit={handleSubmit}>
-                  <label>Nama</label>
-                  <input
-                    className='my-5 max-w-4xl rounded-[50px]'
-                    type='text'
-                    ref={nameRef}
-                  />
-                  <label>Harga</label>
-                  <input
-                    className='my-5 max-w-4xl rounded-[50px]'
-                    type='number'
-                    ref={priceRef}
-                  />
-                  <label>Deskripsi</label>
-                  <input
-                    className='my-5 max-w-4xl rounded-[50px]'
-                    type='text'
-                    ref={descriptionRef}
-                  />
-                  <label>Stock</label>
-                  <input
-                    className='my-5 max-w-4xl rounded-[50px]'
-                    type='number'
-                    ref={stockRef}
-                  />
-                  <Button
-                    className='my-5 max-w-xs rounded-[50px] bg-brown text-2xl'
-                    type='submit'
-                    value='Simpan'
-                  >
-                    Simpan
-                  </Button>
-                  <Button
-                    className='my-5 max-w-xs rounded-[50px] bg-brown text-2xl'
-                    onClick={() => Router.back()}
-                  >
-                    Kembali
-                  </Button>
-                </form>
-              </div>
+                  <Dropzone.Accept>
+                    <FiUpload size={50} className='text-blue-500' />
+                  </Dropzone.Accept>
+                  <Dropzone.Reject>
+                    <FiXCircle size={50} className='text-red-500' />
+                  </Dropzone.Reject>
+                  <Dropzone.Idle>
+                    <FiImage size={50} />
+                  </Dropzone.Idle>
+                  <div>
+                    <Text size='xl' inline>
+                      Geser file gambar ke sini atau klik untuk upload
+                    </Text>
+                    <Text size='sm' color='dimmed' inline mt={7}>
+                      File tidak boleh lebih dari 25MB
+                    </Text>
+                  </div>
+                </Group>
+              </Dropzone>
+              <Separator height={1.5} width='50%' className='mx-auto' />
             </div>
+            <form
+              className='flex w-full flex-col space-y-2 px-12 pb-12'
+              id='form'
+              onSubmit={handleSubmit}
+            >
+              <label className='ml-5'>Nama</label>
+              <input
+                className='rounded-full border-none px-6'
+                type='text'
+                ref={nameRef}
+                placeholder='Isi nama produk'
+              />
+              <label className='ml-5'>Harga</label>
+              <input
+                className='rounded-full border-none px-6'
+                type='text'
+                ref={priceRef}
+                placeholder='Isi harga produk'
+              />
+              <label className='ml-5'>Stock</label>
+              <input
+                className='rounded-full border-none px-6'
+                type='text'
+                ref={stockRef}
+                placeholder='Isi stock produk'
+              />
+              <label className='ml-5'>Deskripsi</label>
+              <textarea
+                className='rounded-3xl border-none px-6'
+                rows={4}
+                ref={descriptionRef}
+                placeholder='Isi deskripsi produk'
+              ></textarea>
+            </form>
+          </div>
+          <div className='mt-9 flex items-center justify-end gap-7'>
+            <Button
+              className='rounded-3xl py-6 px-10 font-secondary'
+              variant='outline'
+              type='submit'
+              form='form'
+            >
+              Tambahkan Produk
+            </Button>
           </div>
         </div>
       </main>

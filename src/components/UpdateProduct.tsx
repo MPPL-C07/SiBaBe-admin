@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/hooks/redux';
 
 import Button from '@/components/buttons/Button';
 import NextImage from '@/components/NextImage';
+import Separator from '@/components/Separator';
 
 import { updateProduct } from '@/redux/actions/Products';
 
@@ -27,8 +28,7 @@ export default function UpdateProduct({
   const [description, setDescription] = React.useState(product.description);
   const [stock, setStock] = React.useState(product.stock);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     // add product
     // console.log(name, price, description, stock);
     dispatch(
@@ -38,8 +38,8 @@ export default function UpdateProduct({
   };
 
   return (
-    <div className='mb-8 gap-24 overflow-hidden rounded-[50px]'>
-      <div>
+    <div className='overflow-hidden rounded-[50px] bg-grey'>
+      <div className='mb-8'>
         <RiCloseFill
           className='absolute top-7 right-7 z-10 cursor-pointer text-4xl'
           onClick={() => setOpened(false)}
@@ -50,48 +50,47 @@ export default function UpdateProduct({
           alt={product.name}
           width={1024}
           height={320}
+          imgClassName='object-none'
         />
-        <div className='ml-14 mt-7'>
-          <p className='text-center font-secondary text-2xl'>
-            Deskripsi Produk
-          </p>
-          <form className='flex flex-col' onSubmit={handleSubmit}>
-            <label>Nama</label>
+        <Separator height={1.5} width='50%' className='mx-auto' />
+        <div className='mx-14 my-7 space-y-5 flex flex-col items-center'>
+          <h3 className='text-center font-secondary'>Deskripsi Produk</h3>
+          <form className='flex flex-col space-y-2 w-full'>
+            <label className='ml-5'>Nama</label>
             <input
-              className='my-5 max-w-4xl rounded-[50px]'
+              className='rounded-full border-none px-6'
               type='text'
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <label>Harga</label>
+            <label className='ml-5'>Harga</label>
             <input
-              className='my-5 max-w-4xl rounded-[50px]'
+              className='rounded-full border-none px-6'
               type='text'
               value={price}
               onChange={(e) => setPrice(Number(e.target.value))}
             />
-            <label>Deskripsi</label>
+            <label className='ml-5'>Stock</label>
             <input
-              className='my-5 max-w-4xl rounded-[50px]'
-              type='text'
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <label>Stock</label>
-            <input
-              className='my-5 max-w-4xl rounded-[50px]'
+              className='rounded-full border-none px-6'
               type='text'
               value={stock}
               onChange={(e) => setStock(Number(e.target.value))}
             />
-            <Button
-              className='my-5 max-w-xs rounded-[50px] bg-yellow-500 text-2xl'
-              type='submit'
-              value='Simpan'
-            >
-              Simpan
-            </Button>
+            <label className='ml-5'>Deskripsi</label>
+            <textarea
+              className='border-none px-6 rounded-3xl'
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </form>
+          <Button
+            className='rounded-full bg-brown py-4 px-24 font-secondary font-bold'
+            onClick={handleSubmit} 
+          >
+            Simpan
+          </Button>
         </div>
       </div>
     </div>
