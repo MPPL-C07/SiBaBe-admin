@@ -164,7 +164,7 @@ function NewProduct() {
               <label className='ml-5'>Harga</label>
               <input
                 className='rounded-full border-none px-6'
-                type='text'
+                type='number'
                 ref={priceRef}
                 required
                 placeholder='Isi harga produk'
@@ -172,7 +172,7 @@ function NewProduct() {
               <label className='ml-5'>Stock</label>
               <input
                 className='rounded-full border-none px-6'
-                type='text'
+                type='number'
                 ref={stockRef}
                 required
                 placeholder='Isi stock produk'
