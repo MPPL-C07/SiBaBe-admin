@@ -43,7 +43,7 @@ function ProductPage() {
         withCloseButton={false}
         padding={0}
         radius={50}
-        size={982}
+        size={825}
       >
         {selectedProduct && (
           <ConfirmRemove
