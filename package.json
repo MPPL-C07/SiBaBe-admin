@@ -18,6 +18,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@delosaqua/scylla": "^0.1.8",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@mantine/core": "^5.5.4",
@@ -36,7 +37,6 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.1",
-    "scylla-ui": "^0.1.6",
     "tailwind-merge": "^1.6.0"
   },
   "devDependencies": {

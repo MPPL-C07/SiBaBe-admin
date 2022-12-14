@@ -21,12 +21,6 @@ export default function ProductCard({
   setOpenConfirmRemove,
   setSelectedProduct,
 }: ProductCardProps) {
-  // const { cart } = useAppSelector(({ cart }) => cart);
-  // const dispatch = useAppDispatch();
-
-  // const isInCart = (id: string) => {
-  //   return !!cart.items[id];
-  // };
   return (
     <div
       className='relative h-56 w-64 cursor-pointer overflow-hidden rounded-[30px] bg-grey transition-all duration-200 hover:scale-95'

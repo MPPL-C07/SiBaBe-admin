@@ -64,7 +64,7 @@ export default function withAuth<T extends WithAuthProps = WithAuthProps>(
                   dispatch(logout());
                   router.push(LOGIN_ROUTE);
                 }
-                return Promise.reject(error);
+                return Promise.reject(error.message);
               }
             );
           }
