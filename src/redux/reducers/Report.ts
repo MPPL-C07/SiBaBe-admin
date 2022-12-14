@@ -1,13 +1,12 @@
-import { AxiosError } from 'axios';
 import update from 'immutability-helper';
 import { AnyAction } from 'redux';
 
-import { Report } from '@/types';
+import { ApiResponseType, Report } from '@/types';
 
 type ReportState = {
   report?: Report[];
   loading: boolean;
-  error?: AxiosError;
+  error?: ApiResponseType;
 };
 
 const initialState = {
@@ -27,7 +26,7 @@ const ReportReducer = (state = initialState, action: AnyAction) => {
       });
     case 'GET_MONTHLY_REPORT_ERROR':
       return update(state, {
-        error: { $set: action.payload.message },
+        error: { $set: action.error },
         loading: { $set: false },
       });
     default:

@@ -115,3 +115,9 @@ export type Report = {
   year: number;
   report: ReportData[];
 };
+
+export type ApiResponseType = {
+  message: string;
+  errors: string;
+  data: object;
+};

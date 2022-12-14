@@ -1,13 +1,12 @@
-import { AxiosError } from 'axios';
 import update from 'immutability-helper';
 import { AnyAction } from 'redux';
 
-import { Product } from '@/types';
+import { ApiResponseType, Product } from '@/types';
 
 type ProductState = {
   products: Product[];
   loading: boolean;
-  error?: AxiosError;
+  error?: ApiResponseType;
 };
 
 const initialState = {
@@ -34,7 +33,7 @@ const ProductReducer = (state = initialState, action: AnyAction) => {
     case 'PRODUCTS_FETCH_ERROR':
       return update(state, {
         loading: { $set: false },
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
       });
     case 'ADD_PRODUCT':
       return update(state, {
@@ -48,7 +47,7 @@ const ProductReducer = (state = initialState, action: AnyAction) => {
     case 'ADD_PRODUCT_ERROR':
       return update(state, {
         loading: { $set: false },
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
       });
     case 'DELETE_PRODUCT':
       return update(state, {
@@ -66,7 +65,7 @@ const ProductReducer = (state = initialState, action: AnyAction) => {
     case 'DELETE_PRODUCT_ERROR':
       return update(state, {
         loading: { $set: false },
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
       });
     case 'UPDATE_PRODUCT':
       return update(state, {
@@ -84,7 +83,7 @@ const ProductReducer = (state = initialState, action: AnyAction) => {
     case 'UPDATE_PRODUCT_ERROR':
       return update(state, {
         loading: { $set: false },
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
       });
     default:
       return state;

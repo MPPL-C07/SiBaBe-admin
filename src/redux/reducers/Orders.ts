@@ -1,18 +1,22 @@
-import { AxiosError } from 'axios';
 import update from 'immutability-helper';
 import { AnyAction } from 'redux';
 
-import { Orders } from '@/types';
+import { ApiResponseType, Orders } from '@/types';
 
 type OrderState = {
-  orders?: Orders[];
+  orders: Orders[];
   loading: boolean;
-  error?: AxiosError;
+  error?: ApiResponseType;
 };
 
 const initialState = {
   loading: false,
 } as OrderState;
+
+const findIndex = (id: number, orders: Orders[]) => {
+  const index = orders.findIndex((order) => order.orderId === id);
+  return index;
+};
 
 const OrderReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
@@ -27,7 +31,7 @@ const OrderReducer = (state = initialState, action: AnyAction) => {
       });
     case 'FETCH_ORDER_ERROR':
       return update(state, {
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
         loading: { $set: false },
       });
     case 'CONFIRM_ORDER':
@@ -36,11 +40,16 @@ const OrderReducer = (state = initialState, action: AnyAction) => {
       });
     case 'CONFIRM_ORDER_SUCCESS':
       return update(state, {
+        orders: {
+          [findIndex(action.meta.id, state.orders)]: {
+            status: { $set: action.payload.data.status },
+          },
+        },
         loading: { $set: false },
       });
     case 'CONFIRM_ORDER_ERROR':
       return update(state, {
-        error: { $set: action.payload.error },
+        error: { $set: action.error },
         loading: { $set: false },
       });
     default:
