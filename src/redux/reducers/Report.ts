@@ -5,6 +5,7 @@ import { ApiResponseType, Report } from '@/types';
 
 type ReportState = {
   report?: Report[];
+  // addProduction?: addProduction[];
   loading: boolean;
   error?: ApiResponseType;
 };
@@ -25,6 +26,19 @@ const ReportReducer = (state = initialState, action: AnyAction) => {
         loading: { $set: false },
       });
     case 'GET_MONTHLY_REPORT_ERROR':
+      return update(state, {
+        error: { $set: action.error },
+        loading: { $set: false },
+      });
+    case 'ADD_PRODUCTION':
+      return update(state, {
+        loading: { $set: true },
+      });
+    case 'ADD_PRODUCTION_SUCCESS':
+      return update(state, {
+        loading: { $set: false },
+      });
+    case 'ADD_PRODUCTION_ERROR':
       return update(state, {
         error: { $set: action.error },
         loading: { $set: false },

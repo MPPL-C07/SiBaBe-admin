@@ -105,7 +105,7 @@ export type OrderList = {
 };
 
 export type ReportData = {
-  date: Date;
+  date: string;
   income: number;
   expense: number;
 };
@@ -114,6 +114,13 @@ export type Report = {
   month: string;
   year: number;
   report: ReportData[];
+};
+
+export type addProduction = {
+  date: string;
+  name: string;
+  totalPrice: number;
+  image: string;
 };
 
 export type ApiResponseType = {

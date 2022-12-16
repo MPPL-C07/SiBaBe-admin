@@ -85,6 +85,7 @@ export default function OrdersRow({ orders }: OrdersRowProps) {
                 ></FiCheck>
                 <div
                   style={{
+                    backgroundColor: '#D6AD60',
                     height: '60px',
                     border: '1px solid #D6AD60BF',
                   }}
