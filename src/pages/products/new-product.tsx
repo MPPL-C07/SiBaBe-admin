@@ -34,7 +34,7 @@ function NewProduct() {
     if (files.length === 0) {
       toast.error('Gambar harus diisi');
       return;
-    };
+    }
     // add product
     if (
       nameRef.current &&

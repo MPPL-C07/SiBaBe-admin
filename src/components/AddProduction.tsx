@@ -42,9 +42,7 @@ export default function AddProduction({ setOpened }: AddProductionProps) {
       const image = await onUpload();
 
       for (let i = 0; i < name.length; i++) {
-        dispatch(
-          addProduction(date, name[i], totalPrice[i], image)
-        );
+        dispatch(addProduction(date, name[i], totalPrice[i], image));
       }
       setOpened(false);
     }
@@ -150,7 +148,7 @@ export default function AddProduction({ setOpened }: AddProductionProps) {
               <Separator width='30%' height={1} className='mx-auto my-5' />
 
               {name?.map((_, index) => (
-                <div className='flex flex-row gap-12 my-2' key={index}>
+                <div className='my-2 flex flex-row gap-12' key={index}>
                   <div className='flex flex-1 flex-col'>
                     <label className='ml-5'>Nama</label>
                     <input
